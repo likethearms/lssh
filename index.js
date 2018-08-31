@@ -23,7 +23,13 @@ if (fs.existsSync(configPath)) {
 
 const listServers = () => {
   const data = [['NAME', 'IP']];
-  servers.forEach(s => data.push([s.name, s.ip]));
+  servers
+    .sort((a, b) => {
+      if (a.name > b.name) return 1;
+      if (b.name > a.name) return -1;
+      return 0;
+    })
+    .forEach(s => data.push([s.name, s.ip]));
   shell.echo(table(data));
 };
 
