@@ -35,7 +35,8 @@ const listServers = () => {
 
 const connect = (name) => {
   const server = servers.find(s => s.name === name);
-  spawn(`ssh -t ${server.user}@${server.ip}`, { stdio: 'inherit', shell: true });
+  if (!server) return shell.echo('There is no such server');
+  return spawn(`ssh -t ${server.user}@${server.ip}`, { stdio: 'inherit', shell: true });
 };
 
 const addNewServer = (name, ip, user) => {
