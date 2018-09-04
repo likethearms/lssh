@@ -7,7 +7,7 @@ const program = require('commander');
 const { table } = require('table');
 const pkg = require('./package');
 
-const configPath = `${os.homedir()}/.nssh.json`;
+const configPath = `${os.homedir()}/.lssh.json`;
 
 if (!shell.which('ssh')) {
   shell.echo('Sorry, this script requires git');
