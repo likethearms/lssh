@@ -21,6 +21,8 @@ if (fs.existsSync(configPath)) {
   servers = [];
 }
 
+const saveServerList = list => fs.writeFileSync(configPath, JSON.stringify(list, null, 4));
+
 const listServers = () => {
   const data = [['NAME', 'IP']];
   servers
@@ -42,7 +44,14 @@ const connect = (name) => {
 const addNewServer = (name, ip, user) => {
   if (servers.find(s => s.name === name)) return shell.echo('Server name already exists!');
   servers.push({ name, ip, user });
-  return fs.writeFileSync(configPath, JSON.stringify(servers, null, 4));
+  return saveServerList(servers);
+};
+
+const removeServer = (name) => {
+  const serverIndex = servers.findIndex(s => s.name === name);
+  if (serverIndex === -1) return shell.echo('There is no such server!');
+  servers.splice(serverIndex, 1);
+  return saveServerList(servers);
 };
 
 program
@@ -52,6 +61,11 @@ program
   .command('add <name> <ip> <user>')
   .description('Add new server')
   .action(addNewServer);
+
+program
+  .command('remove <name>')
+  .description('Remove server')
+  .action(removeServer);
 
 program
   .command('ssh <name>')
