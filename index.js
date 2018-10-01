@@ -44,14 +44,21 @@ const connect = (name) => {
 const addNewServer = (name, ip, user) => {
   if (servers.find(s => s.name === name)) return shell.echo('Server name already exists!');
   servers.push({ name, ip, user });
-  return saveServerList(servers);
+  saveServerList(servers);
+  return shell.echo(`${name} (${ip}) created!`);
 };
 
 const removeServer = (name) => {
   const serverIndex = servers.findIndex(s => s.name === name);
   if (serverIndex === -1) return shell.echo('There is no such server!');
   servers.splice(serverIndex, 1);
-  return saveServerList(servers);
+  saveServerList(servers);
+  return shell.echo(`${name} removed!`);
+};
+
+const invalidCommand = () => {
+  shell.echo('Invalid command: %s\nSee --help for a list of available commands.', program.args[0]);
+  process.exit(1);
 };
 
 program
@@ -64,6 +71,7 @@ program
 
 program
   .command('remove <name>')
+  .alias('rm')
   .description('Remove server')
   .action(removeServer);
 
@@ -77,5 +85,9 @@ program
   .alias('ls')
   .description('List all configured servers')
   .action(listServers);
+
+program
+  .command('*')
+  .action(invalidCommand);
 
 program.parse(process.argv);
