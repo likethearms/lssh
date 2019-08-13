@@ -21,7 +21,7 @@ if (fs.existsSync(configPath)) {
   servers = [];
 }
 
-const saveServerList = list => fs.writeFileSync(configPath, JSON.stringify(list, null, 4));
+const saveServerList = (list) => fs.writeFileSync(configPath, JSON.stringify(list, null, 4));
 
 const listServers = () => {
   const data = [['NAME', 'IP']];
@@ -31,25 +31,25 @@ const listServers = () => {
       if (b.name > a.name) return -1;
       return 0;
     })
-    .forEach(s => data.push([s.name, s.ip]));
+    .forEach((s) => data.push([s.name, s.ip]));
   shell.echo(table(data));
 };
 
 const connect = (name) => {
-  const server = servers.find(s => s.name === name);
+  const server = servers.find((s) => s.name === name);
   if (!server) return shell.echo('There is no such server');
   return spawn(`ssh -t ${server.user}@${server.ip}`, { stdio: 'inherit', shell: true });
 };
 
 const addNewServer = (name, ip, user) => {
-  if (servers.find(s => s.name === name)) return shell.echo('Server name already exists!');
+  if (servers.find((s) => s.name === name)) return shell.echo('Server name already exists!');
   servers.push({ name, ip, user });
   saveServerList(servers);
   return shell.echo(`${name} (${ip}) created!`);
 };
 
 const removeServer = (name) => {
-  const serverIndex = servers.findIndex(s => s.name === name);
+  const serverIndex = servers.findIndex((s) => s.name === name);
   if (serverIndex === -1) return shell.echo('There is no such server!');
   servers.splice(serverIndex, 1);
   saveServerList(servers);
