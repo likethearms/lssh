@@ -1,13 +1,14 @@
 {
   "name": "lssh",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "",
   "main": "index.js",
   "bin": {
     "lssh": "./index.js"
   },
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint .",
+    "postpublish": "PACKAGE_VERSION=$(cat package.json | grep \\\"version\\\" | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag v$PACKAGE_VERSION && git push --tags"
   },
   "author": "",
   "license": "ISC",
