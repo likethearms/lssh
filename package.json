@@ -1,6 +1,6 @@
 {
   "name": "lssh",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -12,15 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.19.0",
+    "commander": "^3.0.0",
     "shelljs": "^0.8.3",
-    "table": "^5.2.3"
+    "table": "^5.4.5"
   },
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4"
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3"
   }
 }
