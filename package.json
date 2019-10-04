@@ -1,6 +1,6 @@
 {
   "name": "lssh",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -13,9 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^3.0.0",
+    "commander": "^3.0.2",
     "shelljs": "^0.8.3",
-    "table": "^5.4.5"
+    "table": "^5.4.6"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
